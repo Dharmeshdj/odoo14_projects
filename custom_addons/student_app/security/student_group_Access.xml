@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="studentapp_access">
+            <field name="name">Student_app</field>
+            <field name="description">User access level for Student module</field>
+            <field name="sequence">20</field>
+        </record>
+        <record id="student_a" model="res.groups">
+            <field name="name">Student</field>
+            <field name="category_id" ref="studentapp_access"/>
+        </record>
+        <record id="proffessor" model="res.groups">
+            <field name="name">Professor</field>
+            <field name="category_id" ref="studentapp_access"/>
+            <field name="implied_ids" eval="[(4, ref('student_a'))]"/>
+        </record>
+    </data>
+</odoo>

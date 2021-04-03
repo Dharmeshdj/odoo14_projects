@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_app_student_app,student_app.student_app_sd,model_student_data,student_app.student_a,1,1,0,0
+access_student_app_student_app_data_lines,student_app.student_app_sd,model_student_data_lines,student_app.student_a,1,1,0,0
+access_student_app_student_app_course_data,student_app.student_app_pd,model_courses_data,student_app.student_a,1,1,0,0
+access_student_app_student_app_student_skill,student_app.student_app_sd,model_student_skill,student_app.student_a,1,1,0,0
+access_student_app_student_app_p,student_app.student_app_pd,model_student_data,student_app.proffessor,1,1,1,1
+access_student_app_student_app_data_lines_p,student_app.student_app_pd,model_student_data_lines,student_app.proffessor,1,1,1,1
+access_student_app_student_app_student_skill_p,student_app.student_app_pd,model_student_skill,student_app.proffessor,1,1,1,1
+access_student_app_student_app_course_data_p,student_app.student_app_pd,model_courses_data,student_app.proffessor,1,1,1,1
+access_employee_app_user,emp_user_access,model_employee_document,base.group_user,1,1,1,1

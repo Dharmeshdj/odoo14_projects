@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--  -->
+    <record model="ir.ui.view" id="employee_doc_tree_view">
+        <field   name="name">employee.doc.tree.view</field>
+        <field name="model">employee.document</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='name'/>
+                <field name='expiry_date'/>
+                <field name='employee_id'/>
+            </tree>
+        </field>
+    </record>
+    <!--  -->
+    <record model="ir.ui.view" id="employee_doc_form_view">
+        <field name="name">employee.doc.form.view</field>
+        <field name="model">employee.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="approve_action" type="object" string="Approve" class="btn btn-success" states="draft"/>
+                    <button name="refuse_action" type="object" string="Refuse" class="btn btn-danger" states="approved"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved,expired,refused"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <!-- <separator string='Employee Detail'/> -->
+                            <field name='name'/>
+                            <field name='employee_id'/>
+                        </group>
+                        <group>
+                            <!-- <separator string='Document'/> -->
+                            <field name="doc_filename" invisible="1"/>
+                            <field name="file" widget="binary" filename="doc_filename" />
+                            <field name="expiry_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model='ir.actions.act_window' id="employee_manu_action">
+        <field name="name">employee Corner</field>
+        <field name="res_model">employee.document</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem parent="student_data_manu" id="employee_doc_nav_manu" action="employee_manu_action" name="employee" />
+    <!-- employee update-->
+    <record model="ir.ui.view" id="hr_employee_update_view">
+        <field name="name">hr.employee.update.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside" >
+                <button class="oe_stat_button" type="object" name="Emp_Doc_View"
+                        icon="fa-car">
+                    <field name="doc_counts" widget="statinfo" string="Doc"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+<!-- <field name="domain">[('employee_id', '=', active_id)]</field> -->
+<!--by action -->
+<!-- <button class="oe_stat_button" type="action" name="%(employee_manu_action)d"
+                        icon="fa-file">
+                        <field name="doc_counts" widget="statinfo" string="Doc"/>
+                    </button> -->
+<!--by object -->

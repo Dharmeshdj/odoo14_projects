@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- sale order update -->
+        <record model="ir.ui.view" id="sales_order_update_view">
+            <field name="name">sales.order.update.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//form//sheet//notebook//page[@name='other_information']/group" position="inside">
+                    <group string="check">
+                        <field name="quatation_ready"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <!-- sale order tree update field -->
+        <record model='ir.ui.view' id="sales_order_update_view_tree">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='activity_ids']" position="before">
+                    <field string="" name="is_sell"/>
+                </xpath>
+            </field>
+        </record>
+        <!-- sale order form update field -->
+        <record model='ir.ui.view' id="sales_order_update_view_from">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field string="sale" name="is_sell"/>
+                </xpath>
+            </field>
+        </record>
+        <!-- sale_order search_field -->
+        <record model='ir.ui.view' id="sales_order_update_view_tree_search">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_quotation']" position="after">
+                    <group>
+                        <separator/>
+                        <filter string="sale" name='is_sell'  domain="[('is_sell','=','sale')]"/>
+                        <separator/>
+                        <filter string="sale" name='is_sell' context="{'group_by':'is_sell'}" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <!-- res partner update -->
+        <record model='ir.ui.view' id="res_partner_update_field">
+            <field name="name">res.partner.update.field</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- <field name="vat" position="after">
+                <field name="is_student"/>
+                <field name="is_data"/>
+            </field> -->
+                <!-- <xpath expr="//field[@name='vat']" position="replace">
+                    <field name="is_data"/>
+                </xpath> -->
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field  placeholder="country"  name="conutry"/>
+                    <field string="Is Student"  style='margin-left:5px' name="is_student" />
+                    <!-- <td style="width:135px " >
+                            <field string="country"  style='margin-left:10px' placeholder="country" name="conutry"/>
+                        </td > -->
+                    <field name="student_id"/>
+                    <field name="age"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+<!-- <field name="sale_order_template_id" position="after">
+            <field name="quatation_ready"/>
+        </field>  -->
+<!-- <xpath expr="//form//sheet//notebook//page[@name='other_information']/group/group/field[@name='client_order_ref']" position="after">
+                <group string="check">
+                <field name="quatation_ready"/>
+                </group>
+                </xpath> -->
+<!-- </record>
+        sale.view_quotation_tree_with_onboarding
+        <record> -->
+<!-- sale_order search_field -->
+<!-- <record model='ir.ui.view' id="sales_order_update_view_tree_search">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <search>
+                        <filter name='is_sell' />
+                    </search>
+                </xpath>
+            </field>
+        </record> -->
+<!--  -->

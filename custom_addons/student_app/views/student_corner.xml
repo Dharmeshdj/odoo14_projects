@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+   
+        <!-- tree view -->
+        <record model='ir.ui.view' id='student_tree_view'>
+            <field name="name">student_tree</field>
+            <field name='model'>student.data</field>
+            <field name='arch' type='xml'>
+                <!-- editable='top' -->
+                <tree>
+                    <field name='handle' widget="handle"></field>
+                    <field name='first_name'></field>
+                    <field name='last_name'></field>
+                    <!-- <field name='res_id'/> -->
+                    <field name='email' optional="show"></field>
+                    <field name='gender'></field>
+                    <field name="student_line_ids"/>
+                </tree>
+            </field>
+        </record>
+        <record model='ir.ui.view' id='student_search_view'>
+            <field name='name'>student_search</field>
+            <field name='model'>student.data</field>
+            <field name='arch' type='xml'>
+                <search>
+                    <field name='first_name'/>
+                    <field name='last_name'/>
+                    <filter string='Male' domain="[('gender','=','male')]" name='male_filter'/>
+                    <filter string='Female' domain="[('gender','=','female')]" name='male_filter'/>
+                    <filter name='Group_search_profession' context="{'group_by':'profestion'}"/>
+                    <!-- <separator/>
+                    <filter string='Student' domain="[('profestion','=','student')]" name='student_filter'/>
+                    <filter string='Professior' domain="[('profestion','=','professor')]" name='professor_filter'/>
+                    <separator/>
+                    
+                    <separator/> -->
+                    <!-- <filter name="Course_gorup_search" string="By Course" context="{'group_by':'course_names_ids'}"></filter> -->
+                    <!-- <filter name="Course_gorup_search" string="Css" domain="[('student_line_ids','=','css')]"></filter> -->
+                </search>
+            </field>
+        </record>
+        <!-- form view -->
+        <record model='ir.ui.view' id='student_form_view'>
+            <field name="name">student.form.view</field>
+            <field name="model">student.data</field>
+            <field name="arch" type='xml'>
+                <form style="background-color: coral;">
+                    <header>
+                        <!-- <button name="278" string="Create Invoice" type="action"/> -->
+                        <!-- <button name="action_confirm"  type="object" string="Confirm" class="btn btn-info" attrs="{'invisible': ['|', ('state','=','confirm') ,('state','=','paid')]}"/> -->
+                        <button name="action_paid"  type="object" string="Pay" class="btn btn-success" states="confirm"/>
+                        <button name="action_confirm"   type="object" string="Set to Confirm" class="btn btn-success" states="pending" />
+                        <button name="action_cancel"  type="object" string="Cancel" class="btn btn-danger" states="confirm,paid"/>
+                        <field name="state" widget="statusbar" statusbar_visible="pending,confirm,paid,cancel"/>
+                        <!--  -->
+                    </header>
+                    <sheet >
+                        <!-- by object -->
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"  class="oe_stat_button" name="stu_course_view"
+                        icon="fa-car">
+                                <field name="course_count" widget="statinfo" string="courses"/>
+                            </button>
+
+                            <!-- by action -->
+                             <button type="action"  class="oe_stat_button" name="%(open_student_course_view)d"
+                        icon="fa-file">
+                                <field name="course_count" widget="statinfo" string="courses"/>
+                            </button>
+                        </div>
+                        <group >
+                            <group>
+                                <h1>
+                                    Entry form
+                                </h1>
+                                <br/>
+                                <separator string='Basic Detail'/>
+                                <field name='first_name' placeholder="name" ></field>
+                                <field name='last_name' placeholder="surname"></field>
+                                <field name='email' widget="email"></field>
+                                <field name='address'></field>
+                            </group>
+                            <group>
+                                <separator string='Photo'/>
+                                <field name="photo_id" widget="image" ></field>
+                                <separator string='Phone Detail'/>
+                                <field name='country_code'></field>
+                                <field name='mobile' widget="phone"></field>
+                            </group>
+                            <group>
+                                <separator string='Other Detail'/>
+                                <field name='gender'></field>
+                                <field name='blood_group'></field>
+                                <!-- <field name='res_id' domain="[('is_student','=',True)]" ></field> -->
+                            </group>
+                            <group>
+                                <separator string='profession Detail'/>
+                                <field name='dates'></field>
+                                <field name='age' ></field>
+                                <!-- <field name='profestion' widget="radio"></field> -->
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="About" name="student_about_page">
+                                <help >From this report, you can have an overview of 
+                            the amount invoiced from your vendors. The search tool can also be used to 
+                            personalise your Invoices reports and so, match this analysis to your needs.
+                    </help>
+                            </page>
+                            <page string="Email Widget" name="student_about_page">
+                                <field name="email_data"  widget="html"/>
+                            </page>
+                            <page string="Skills" name="Student_Skill_page" >
+                                <form>
+                                    <group>
+                                        <field name='skill_list' widget="many2many_tags" options="{'color_field': 'colors'}"/>
+                                    </group>
+                                </form>
+                            </page>
+                            <!-- course one2many field -->
+                            <page string="Course Detail" name="course_page" >
+                                <field name= "student_line_ids">
+                                    <tree editable='bottom'>
+                                        <field name= "course_id" string="Name" options="{'no_create':true,'no_open':true}" domain="[('course_active','=',True)]"/>
+                                        <field name= "course_lengths" string="Length" />
+                                        <field name= "course_amount" string="Amount"/>
+                                        <!-- <field name= "sales_field" /> 
+                                        <field name= "professor_name" />
+                                        <field name= "sale_id" />  -->
+                                        <field name= "stu_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                                <!-- <field name= "course_names_ids">
+                                        <field name= "course_length" />
+                                        <field name= "course_amount" />
+                                        <field name= "course_active" />
+                                    </field> -->
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model='ir.actions.act_window' id='student_manu_action'>
+            <field name="name">Student Form</field>
+            <field name='res_model'>student.data</field>
+            <field name="search_view_id" ref="student_search_view"/>
+            <field name='view_mode'>tree,form</field>
+        </record>
+        <menuitem id="student_data_manu" name="Student Corner"/>
+        <menuitem parent='student_data_manu' id="student_nav_manu" action="student_manu_action" name="Student"/>
+    </data>
+</odoo>
+<!-- <page string="Course Detail" name="school_inquiry_page" >
+                                <field name= 'course_ids'>
+                                    <tree editable='bottom'>
+                                        <field name= 'course_name' string="Name"/>
+                                        <field name= 'course_length' string="Length"/>
+                                        <field name= 'course_amount' string="Amount"/>
+                                        <field name= 'course_active' string="Active"/>
+                                    </tree>
+                                </field>
+                            </page>  -->

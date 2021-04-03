@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--  -->
+    <record model="ir.ui.view" id="course_config_tree_view">
+        <field   name="name">course.config.tree.view</field>
+        <field name="model">courses.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='course_names'/>
+                <field name='course_length'/>
+                <field name='course_amount'/>
+                <field name='course_active'/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="course_config_form_view">
+        <field name="name">course.config.form.view</field>
+        <field name="model">courses.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name='course_names'/>
+                    <field name='course_length'/>
+                    <field name='course_amount'/>
+                    <field name='course_active'/>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record model='ir.actions.act_window' id="course_manu_action">
+        <field name="name">Course Configure</field>
+        <field name="res_model">courses.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- <record id="open_patient_appointment" model="ir.ui.view">
+        <field name="name">User Course Configure</field>
+        <field name="res_model">courses.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('', '=', active_id)]</field>
+        <field name="context">{}</field>
+    </record> -->
+    <!-- <menuitem id="student_data_manu" name="configure"/> -->
+    <menuitem parent='student_data_manu' id="cofigure_manu" name="Configure"/>
+    <menuitem parent='cofigure_manu' id="configure_course_sub" action="course_manu_action" name="Course" sequence="1"></menuitem>
+</odoo>
