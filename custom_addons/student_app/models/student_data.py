@@ -54,13 +54,19 @@ class student_data(models.Model):
     course_count = fields.Integer(compute="course_select_count")
 
     _sql_constraints = [
-        ('unique_phone_cons', 
-        'unique(email)', 
-        'phone must be unique'),
+        ('unique_mail',
+         'unique(email)',
+         'email must be unique'),
+        # ('bom_qty_zero', 'CHECK (age >=18)',
+        #  'All product quantities must be greater or equal to 0.'),
+        ('check_age',
+         'CHECK(age>20 AND age<60)',  # if any condtion False Then Raise Error
+         'check age must beetween 20 and 60'),
 
-        # ('check age must be greater 18',
-        # (),
-        # CHECK(Age >= 18 AND City='Sandnes')),
+        ('unique_phone_cons',
+         'unique(mobile)',
+         'phone must be unique'),
+
 
     ]
 
@@ -71,8 +77,6 @@ class student_data(models.Model):
         for rec in self:
             if not rec.last_name:
                 raise ValidationError("last name must be enter..")
-
-    
 
     def name_get(self):
         result = []
