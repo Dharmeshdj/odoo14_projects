@@ -12,11 +12,11 @@ class ResPartnerUpdate(models.Model):
         [('india', 'India'), ('uk', 'Uk')])
     student_id = fields.Many2one('student.data')
     # dob = fields.Date(related='student_id.dates')
-    # age = fields.Integer(compute='compute_age',store=False)
+    age = fields.Integer(compute='compute_age',store=True)
     
-    age = fields.Integer()
+    # age = fields.Integer()
 
-    @api.depends('student_id.country_code')
+    @api.depends('student_id.dates')
     def compute_age(self):
         print("\n\n\n\ncalling\n\n\n\n")
         # self.age = 20

@@ -51,13 +51,19 @@
                         <!-- <button name="action_confirm"  type="object" string="Confirm" class="btn btn-info" attrs="{'invisible': ['|', ('state','=','confirm') ,('state','=','paid')]}"/> -->
                         <button name="action_paid"  type="object" string="Pay" class="btn btn-success" states="confirm"/>
                         <button name="action_confirm"   type="object" string="Set to Confirm" class="btn btn-success" states="pending" />
-                        <button name="action_cancel"  type="object" string="Cancel" class="btn btn-danger" states="confirm,paid"/>
+                        <!-- <button name="action_cancel"  type="object" string="Cancel" class="btn btn-danger" states="confirm,paid"/> -->
                         <field name="state" widget="statusbar" statusbar_visible="pending,confirm,paid,cancel"/>
                         <!--  -->
                     </header>
                     <sheet >
-                        <!-- by object -->
+                        
+                        
                         <div class="oe_button_box" name="button_box">
+                             <button type="action"  class="oe_stat_button" name="%(student_wizard_manu_action)d"
+                        icon="fa-address-card" string="Wizard" >
+                                <!-- <field name="course_count" widget="statinfo" string="Wizard"/> -->
+                            </button>
+                            <!-- by object -->
                             <button type="object"  class="oe_stat_button" name="stu_course_view"
                         icon="fa-car">
                                 <field name="course_count" widget="statinfo" string="courses"/>
@@ -125,6 +131,9 @@
                                         <field name= "course_id" string="Name" options="{'no_create':true,'no_open':true}" domain="[('course_active','=',True)]"/>
                                         <field name= "course_lengths" string="Length" />
                                         <field name= "course_amount" string="Amount"/>
+                                        <field name= "cancel_reason" string="Reason"/>
+                                        
+                                        <button name="action_cancel"  type="object" string="Cancel" class="btn btn-danger"/>
                                         <!-- <field name= "sales_field" /> 
                                         <field name= "professor_name" />
                                         <field name= "sale_id" />  -->

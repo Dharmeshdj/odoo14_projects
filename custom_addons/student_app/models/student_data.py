@@ -122,10 +122,19 @@ class student_data(models.Model):
                 # print(f"\n\n\n\n\nhi paid{rec}\n\n\n\n\n\n")
                 rec.write({'state': 'paid'})
 
-    def action_cancel(self):
-        for rec in self:
-            if rec.student_line_ids.course_id:
-                rec.write({'state': 'cancel'})
+    # def action_cancel(self):
+    #     for rec in self:
+
+    #         print(f"\n\n\n\n\nhi why cancel\n\n\n\n\n\n")
+    #             # rec.student_line_ids.cancel_reason
+    #             return {
+    #                 'type': 'ir.actions.act_window',
+    #                 'name': 'student.wizard.form',
+    #                 'view_mode': 'form',
+    #                 'res_model': 'student.wizard',
+    #                 'target':'new'
+
+    #             }
 
     @api.model
     def create(self, vals):
@@ -208,6 +217,20 @@ class student_data_lines(models.Model):
     course_amount = fields.Integer()
     # sale_id = fields.Many2one('sale.order',)
     # sales_field = fields.Float(related="sale_id.currency_rate")
+    cancel_reason = fields.Char(max_length=30)
+
+    def action_cancel(self):
+        print(f"\n\n\n\n\nhi dekho cancel\n\n\n\n\n\n")
+        for rec in self:
+            if rec.course_id:
+                print(f"\n\n\n\n\nhi why cancel123\n\n\n\n\n\n")
+                return {
+                    'type': 'ir.actions.act_window',
+                    'name': 'student.wizard.form',
+                    'view_mode': 'form',
+                    'res_model': 'student.wizard',
+                    'target': 'new',
+                }
 
     @api.onchange('course_id')
     def onchange_amount(self):

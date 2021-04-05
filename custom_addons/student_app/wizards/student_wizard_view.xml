@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--  -->
+    <record model="ir.ui.view" id="student_wizard_form_view">
+        <field name="name">student.wizard.form.view</field>
+        <field name="model">student.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <separator string='Reason For Cancel'/>
+                        <field name="reason"></field>
+                    </group>
+                    <footer>
+                        <button type="object" name="submit_wizard" string="Update" class="btn-primary"/>
+                        <button class="btn-secondary" special="cancel" string="Cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model='ir.actions.act_window' id="student_wizard_manu_action">
+        <field name="name">student.wizard.view</field>
+        <field name="res_model">student.wizard</field>
+        <field name="view_mode">form</field>
+        <!-- <field name="target">new</field> -->
+    </record>
+</odoo>

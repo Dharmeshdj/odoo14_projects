@@ -39,7 +39,8 @@
         "views/Configure_skills.xml",
         # "views/hr_employee_update.xml",
         "views/employee_document.xml",
-        
+        "wizards/student_wizard_view.xml"
+
 
     ],
     # only loaded in demonstration mode
