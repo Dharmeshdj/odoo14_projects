@@ -22,7 +22,7 @@
     'version': '14.0.1.0.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['sale', 'hr', 'mail'],
+    'depends': ['base','sale', 'hr', 'mail'],
 
     # always loaded
     'data': [
@@ -33,19 +33,27 @@
         # 'views/templates.xml',
         "views/model_upgrade.xml",
         "views/sale_order_update_view.xml",
+        "wizards/student_wizard_view.xml",
         "views/student_data_lines.xml",
         "views/student_corner.xml",
         "views/Configure_course.xml",
         "views/Configure_skills.xml",
         # "views/hr_employee_update.xml",
         "views/employee_document.xml",
-        "wizards/student_wizard_view.xml"
+        'data/student_data_file.xml',
+        'data/course_data_file.xml',
+        'data/student_data_lines_file.xml',
+        
+        "views/mango_task.xml",
+
 
 
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
+        
+        
     ],
     'installable': True,
     'auto_install': False,

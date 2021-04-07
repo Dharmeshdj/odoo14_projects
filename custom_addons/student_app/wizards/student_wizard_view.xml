@@ -12,7 +12,7 @@
                         <field name="reason"></field>
                     </group>
                     <footer>
-                        <button type="object" name="submit_wizard" string="Update" class="btn-primary"/>
+                        <button type="object" name="submit_wizard" string="Submit" class="btn-primary"/>
                         <button class="btn-secondary" special="cancel" string="Cancel"/>
                     </footer>
                 </sheet>

@@ -52,6 +52,10 @@ class student_data(models.Model):
         [('pending', 'Pending'), ('confirm', 'Confirm'),
          ('paid', 'Paid'), ('cancel', 'Cancel')], )
     course_count = fields.Integer(compute="course_select_count")
+    # login_user = fields.Many2one(
+    #     'res.users', default=lambda self: self.env.user)
+    login_user = fields.Many2one(
+        'res.users')
 
     _sql_constraints = [
         ('unique_mail',
@@ -114,7 +118,7 @@ class student_data(models.Model):
             if rec.student_line_ids.course_id:
                 # print(f"\n\n\n\n\nhi confirm{rec}\n\n\n\n\n\n")
                 # rec.state = "confirm"     # also direct store dasta to field
-                rec.write({'state': 'confirm'})
+                rec.write({'state': 'confirm', 'login_user': self.env.user.id})
 
     def action_paid(self):
         for rec in self:
@@ -122,7 +126,22 @@ class student_data(models.Model):
                 # print(f"\n\n\n\n\nhi paid{rec}\n\n\n\n\n\n")
                 rec.write({'state': 'paid'})
 
-    # def action_cancel(self):
+    def action_cancel_all(self):
+        for rec in self:
+            print(f"\n\nhi why cancel\n\n")
+            line_cousre = self.env['student.data.lines'].search(
+                [('stu_id', '=', rec.id)])
+            # write by default work ass for loop
+            line_cousre.write({'state': 'cancel'})
+            # for course in line_cousre:
+            #     course.course_cancel = False
+            #     rec.write()
+
+        #     self.env["courses.data"].search(
+        #     [('course_names', '=', 'python')])
+            # print(f"\n\n\n\n\n{line_cousre}\n\n\n\n\n\n")
+
+     # def action_cancel(self):
     #     for rec in self:
 
     #         print(f"\n\n\n\n\nhi why cancel\n\n\n\n\n\n")
@@ -138,20 +157,23 @@ class student_data(models.Model):
 
     @api.model
     def create(self, vals):
-        print(f"\n\n\n\n\nhi paid dhamaa create method\n\n\n\n\n\n")
-        print(vals)
+        # print(f"\n\n\n\n\nhi paid dhamaa create method\n\n\n\n\n\n")
+        # print(self.env.user)
 
         readdata = self.env["student.data"].search_count(
             [("first_name", '=', vals["first_name"])])  # dict data access from val
-        print(f'\n\n\n\n\n{readdata}')
+        # print(f'\n\n\n\n\n{readdata}')
         # readdata = self.env["student.data"].sudo().search_count(
         #     [("first_name", '=', vals["first_name"])])
         # readdata = self.env["courses.data"].search(
         #     [('course_names', '=', 'python')])
         # readdata=self.env["courses.data"].search([])
         # print(f"\n\n\n\n{readdata}\n\n")
+        # vals['login_user'] = self.env.user.id
+
         data_record = super(student_data, self).create(vals)
-        print(data_record, "check bhai")
+        # print(f'\n\n\n\n\n{data_record}')
+        # print(data_record, "check bhai")
 
         if readdata:
             raise ValidationError("name must be unique..")
@@ -164,13 +186,13 @@ class student_data(models.Model):
         print(vals)
         for rec in self:
             readdata = self.env["courses.data"].search([])
-            if readdata:
-                # print(f"\n\n\n\n{readdata[0].course_names}\n\n")
-                # print(f"\n\n\n\n\nhi dhamesh write method\n\n\n\n\n\n")
-                # print(super().write(vals))
-                # from multiple record acess perticular record
-                # self.env["student.data"].create({"first_name": "manthanbhai"}) cmd
-                print(readdata)
+            # if readdata:
+            # print(f"\n\n\n\n{readdata[0].course_names}\n\n")
+            # print(f"\n\n\n\n\nhi dhamesh write method\n\n\n\n\n\n")
+            # print(super().write(vals))
+            # from multiple record acess perticular record
+            # self.env["student.data"].create({"first_name": "manthanbhai"}) cmd
+            # print(readdata)
         return super(student_data, self).write(vals)
 
     def unlink(self):
@@ -218,6 +240,7 @@ class student_data_lines(models.Model):
     # sale_id = fields.Many2one('sale.order',)
     # sales_field = fields.Float(related="sale_id.currency_rate")
     cancel_reason = fields.Char(max_length=30)
+    course_cancel = fields.Boolean(default="True")
 
     def action_cancel(self):
         print(f"\n\n\n\n\nhi dekho cancel\n\n\n\n\n\n")
@@ -230,6 +253,7 @@ class student_data_lines(models.Model):
                     'view_mode': 'form',
                     'res_model': 'student.wizard',
                     'target': 'new',
+
                 }
 
     @api.onchange('course_id')
@@ -239,5 +263,5 @@ class student_data_lines(models.Model):
             if rec.course_id:
                 rec.stu_id.state = 'pending'
                 self.course_amount = rec.course_id.course_amount
-        print(f"\n\n\n\n {self.course_amount, rec.course_amount,rec.id} \n\n\n\n"
-              )
+        # print(f"\n\n\n\n {self.course_amount, rec.course_amount,rec.id} \n\n\n\n"
+            #   )

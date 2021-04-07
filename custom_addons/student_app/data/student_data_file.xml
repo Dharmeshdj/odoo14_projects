@@ -1,0 +1,36 @@
+<odoo>
+    <data noupdate="1">
+        <record  id="student_detail_1" model="student.data">
+            <field name="first_name">Michael</field>
+            <field name="last_name">Jackson</field>
+            <field name="country_code">34</field>
+            <field name="age">25</field>
+            <field name="mobile">9898</field>
+            <field name="login_user" ref="base.user_admin"></field>
+        </record>
+        <record  id="student_detail_2" model="student.data">
+            <field name="first_name">Abdul</field>
+            <field name="last_name">Kalam</field>
+            <field name="country_code">92</field>
+            <field name="age">58</field>
+            <field name="mobile">9899</field>
+            <field name="login_user" ref="base.user_admin"></field>
+        </record>
+        <record  id="student_detail_3" model="student.data">
+            <field name="first_name">Alon</field>
+            <field name="last_name">Musk</field>
+            <field name="mobile">98996</field>
+            <field name="country_code">91</field>
+            <field name="age">35</field>
+            <field name="login_user" ref="base.user_admin"></field>
+        </record>
+        <record  id="student_detail_4" model="student.data">
+            <field name="first_name">Tonny</field>
+            <field name="last_name">Stark</field>
+            <field name="country_code">93</field>
+            <field name="mobile">98945</field>
+            <field name="age">35</field>
+            <field name="login_user" ref="base.user_admin"></field>
+        </record>
+    </data>
+</odoo>

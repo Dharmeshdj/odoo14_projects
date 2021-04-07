@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-   
         <!-- tree view -->
         <record model='ir.ui.view' id='student_tree_view'>
             <field name="name">student_tree</field>
@@ -51,26 +50,23 @@
                         <!-- <button name="action_confirm"  type="object" string="Confirm" class="btn btn-info" attrs="{'invisible': ['|', ('state','=','confirm') ,('state','=','paid')]}"/> -->
                         <button name="action_paid"  type="object" string="Pay" class="btn btn-success" states="confirm"/>
                         <button name="action_confirm"   type="object" string="Set to Confirm" class="btn btn-success" states="pending" />
-                        <!-- <button name="action_cancel"  type="object" string="Cancel" class="btn btn-danger" states="confirm,paid"/> -->
+                        <button name="action_cancel_all"  type="object" string="Cancel" class="btn btn-danger" states="confirm,paid"/>
                         <field name="state" widget="statusbar" statusbar_visible="pending,confirm,paid,cancel"/>
                         <!--  -->
                     </header>
                     <sheet >
-                        
-                        
                         <div class="oe_button_box" name="button_box">
-                             <button type="action"  class="oe_stat_button" name="%(student_wizard_manu_action)d"
+                            <!-- <button type="action"  class="oe_stat_button" name="%(student_wizard_manu_action)d"
                         icon="fa-address-card" string="Wizard" >
-                                <!-- <field name="course_count" widget="statinfo" string="Wizard"/> -->
-                            </button>
+                                 <field name="course_count" widget="statinfo" string="Wizard"/>
+                            </button> -->
                             <!-- by object -->
                             <button type="object"  class="oe_stat_button" name="stu_course_view"
                         icon="fa-car">
                                 <field name="course_count" widget="statinfo" string="courses"/>
                             </button>
-
                             <!-- by action -->
-                             <button type="action"  class="oe_stat_button" name="%(open_student_course_view)d"
+                            <button type="action"  class="oe_stat_button" name="%(open_student_course_view)d"
                         icon="fa-file">
                                 <field name="course_count" widget="statinfo" string="courses"/>
                             </button>
@@ -86,6 +82,17 @@
                                 <field name='last_name' placeholder="surname"></field>
                                 <field name='email' widget="email"></field>
                                 <field name='address'></field>
+                                <field name='login_user' readonly='True'></field>
+                                <div id="fruits" class="fruits">
+        <span>Apple</span>
+        <span>Mango</span>
+        <span>Graps</span>
+</div>
+<div class="vegetable">
+        <span>Potato</span>
+        <span>Onion</span>
+        <span>Tomato</span>
+</div>
                             </group>
                             <group>
                                 <separator string='Photo'/>
@@ -132,8 +139,8 @@
                                         <field name= "course_lengths" string="Length" />
                                         <field name= "course_amount" string="Amount"/>
                                         <field name= "cancel_reason" string="Reason"/>
-                                        
-                                        <button name="action_cancel"  type="object" string="Cancel" class="btn btn-danger"/>
+                                        <button name="action_cancel"  type="object" string="Cancel" class="btn btn-danger" attrs="{'invisible': [('course_cancel','=',False)]}"/>
+                                        <field name= "course_cancel" string="cancelled"/>
                                         <!-- <field name= "sales_field" /> 
                                         <field name= "professor_name" />
                                         <field name= "sale_id" />  -->
