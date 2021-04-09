@@ -40,9 +40,11 @@
         "views/Configure_skills.xml",
         # "views/hr_employee_update.xml",
         "views/employee_document.xml",
-        'data/student_data_file.xml',
         'data/course_data_file.xml',
-        'data/student_data_lines_file.xml',
+        'data/skill_data_file.xml',
+        'data/student_data_file.xml',
+       
+        # 'data/student_data_lines_file.xml',
         
         "views/mango_task.xml",
 

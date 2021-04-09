@@ -170,14 +170,20 @@ class student_data(models.Model):
         # readdata=self.env["courses.data"].search([])
         # print(f"\n\n\n\n{readdata}\n\n")
         # vals['login_user'] = self.env.user.id
-
+        #-------------------------just check logic on create only
+        # vals = {
+        #     'student_line_ids': [(0, 0, {
+        #         'course_id': self.env.ref('student_app.Course_4').id,
+        #         'course_amount': 6000,
+        #     })]
+        #     }
         data_record = super(student_data, self).create(vals)
-        # print(f'\n\n\n\n\n{data_record}')
-        # print(data_record, "check bhai")
+        # print(f"check bhai {data_record}")
 
         if readdata:
             raise ValidationError("name must be unique..")
         else:
+
             return data_record
 
     # method call at time of update

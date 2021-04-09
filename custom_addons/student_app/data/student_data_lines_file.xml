@@ -3,6 +3,7 @@
         <record  id="student_line_1" model="student.data.lines">
             <field name="course_id" ref="Course_1"></field>
             <field name="stu_id" ref="student_detail_1"></field>
+            
         </record>
         <record  id="student_line_2" model="student.data.lines">
             <field name="course_id" ref="Course_2"></field>

@@ -7,6 +7,22 @@
             <field name="age">25</field>
             <field name="mobile">9898</field>
             <field name="login_user" ref="base.user_admin"></field>
+            <field name="student_line_ids" eval="[(0,0,{
+                'course_id':ref('Course_1'),
+                'course_amount':2000,
+                }),
+                (0,0,{
+                'course_id':ref('Course_2'),
+                'course_amount':3000,
+                })
+            ]"></field>
+            <!-- <field name="skill_list" eval="[(0,0,{
+                'hobby_idd':ref('skill_1'),
+                }),
+                [(0,0,{
+                'hobby_idd':ref(skill_3'),
+                }),
+             ]"></field> -->
         </record>
         <record  id="student_detail_2" model="student.data">
             <field name="first_name">Abdul</field>
@@ -15,6 +31,15 @@
             <field name="age">58</field>
             <field name="mobile">9899</field>
             <field name="login_user" ref="base.user_admin"></field>
+            <field name="student_line_ids" eval="[(0,0,{
+                'course_id':ref('Course_4'),
+                'course_amount':2000,
+                }),
+                (0,0,{
+                'course_id':ref('Course_2'),
+                'course_amount':3000,
+                })
+            ]"></field>
         </record>
         <record  id="student_detail_3" model="student.data">
             <field name="first_name">Alon</field>
@@ -23,6 +48,15 @@
             <field name="country_code">91</field>
             <field name="age">35</field>
             <field name="login_user" ref="base.user_admin"></field>
+            <field name="student_line_ids" eval="[(0,0,{
+                'course_id':ref('Course_2'),
+                'course_amount':2000,
+                }),
+                (0,0,{
+                'course_id':ref('Course_1'),
+                'course_amount':3000,
+                })
+            ]"></field>
         </record>
         <record  id="student_detail_4" model="student.data">
             <field name="first_name">Tonny</field>
@@ -31,6 +65,15 @@
             <field name="mobile">98945</field>
             <field name="age">35</field>
             <field name="login_user" ref="base.user_admin"></field>
+            <field name="student_line_ids" eval="[(0,0,{
+                'course_id':ref('Course_2'),
+                'course_amount':2000,
+                }),
+                (0,0,{
+                'course_id':ref('Course_1'),
+                'course_amount':3000,
+                })
+            ]"></field>
         </record>
     </data>
 </odoo>
